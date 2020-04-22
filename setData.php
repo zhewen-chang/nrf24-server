@@ -1,6 +1,7 @@
 <?php
 $data = isset($_GET["data"])? $_GET["data"] : "";
 $code = isset( $_GET["code"])?$_GET["code"] : "";
+$near_gateway = isset( $_GET["gateway"])?$_GET["gateway"] : "";
 if($code=='DCLAB')
 {
     $date = date("Y-m-d H:i:s");
@@ -16,13 +17,13 @@ if($code=='DCLAB')
     $id=intval($id);
 
     if($data[4]=='R')
-        register($id,$level,$date);
+        register($id,$level,$date,$near_gateway);
     else if($data[4]=='S')
-        nrf_sleep($id,$level,$date);
+        nrf_sleep($id,$level,$date,$near_gateway);
     else if($data[4]=='W')
-        wrakeup($id,$level,$date);
+        wrakeup($id,$level,$date,$near_gateway);
     else if($data[4]=='A')
-        alive($id,$level,$date);
+        alive($id,$level,$date,$near_gateway);
 }
 
 function isregister($id){
@@ -36,7 +37,7 @@ function isregister($id){
 
     if($stmt->fetch())
     {
-        $flag=true;
+        $flag=true;//already register
     }
     else
         $flag=false;
@@ -72,7 +73,7 @@ function issleep($id){
     return $flag;
 }
 
-function register($id,$level,$date)
+function register($id,$level,$date,$near_gateway)
 {
     if(isregister($id)==true)
         return ;
@@ -86,17 +87,17 @@ function register($id,$level,$date)
     $stmt->close();
     $mysqli->close();
 
-    writelog($id,$level,$date,"Register");
+    writelog($id,$level,$date,"Register",$near_gateway);
 
 }
 
-function writelog($id,$level,$time,$sign){
+function writelog($id,$level,$time,$sign,$near_gateway){
 
     $mysqli=new mysqli('localhost','root','Callum@1996','swimmingpool');
 
-    $sql="INSERT INTO `log` (id,level,time,sign)VALUES(?,?,?,?)";
+    $sql="INSERT INTO `log` (id,level,time,sign,near_gateway)VALUES(?,?,?,?,?)";
     $stmt=$mysqli->prepare($sql);
-    $stmt->bind_param('isss',$id,$level,$time,$sign);
+    $stmt->bind_param('issss',$id,$level,$time,$sign,$near_gateway);
     $stmt->execute();
     
     $stmt->close();
@@ -104,20 +105,20 @@ function writelog($id,$level,$time,$sign){
 
 }
 
-function nrf_sleep($id,$level,$date){
+function nrf_sleep($id,$level,$date,$near_gateway){
     if(issleep($id)==true)
         return;
-    writelog($id,$level,$date,"Sleep");
+    writelog($id,$level,$date,"Sleep",$near_gateway);
 }    
 
-function wakeup($id,$level,$date){
+function wakeup($id,$level,$date,$near_gateway){
     if(issleep($id)==false)
         return;
-    writelog($id,$level,$date,"Wakeup");
+    writelog($id,$level,$date,"Wakeup",$near_gateway);
 } 
 
-function alive($id,$level,$date){
+function alive($id,$level,$date,$near_gateway){
     if(issleep($id)==true)
         return;
-    writelog($id,$level,$date,"Alive");
+    writelog($id,$level,$date,"Alive",$near_gateway);
 } 
