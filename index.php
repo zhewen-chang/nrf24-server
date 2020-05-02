@@ -31,7 +31,12 @@
                     </thead>
                     <tbody>
                         <?php
+<<<<<<< HEAD
                             $mysqli=new mysqli('localhost','zhe','DCLAB@zaq1xsw2','swimmingpool');
+=======
+                            $mysqli=new mysqli('localhost','root','Callum@1996','swimmingpool');
+
+>>>>>>> 3a56ccdb3b229012a0bfa1e74e91e4d2cc888ceb
                             $sql="SELECT id FROM customer";
                             $stmt=$mysqli->prepare($sql);
                             $stmt->execute();
