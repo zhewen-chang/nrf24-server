@@ -27,7 +27,8 @@ if($code=='DCLAB')
         alive($id,$level,$date,$near_gateway);
 }
 
-function isregister($id){
+function isregister($id)
+{
     $mysqli=new mysqli('localhost','zhe','DCLAB@zaq1xsw2','swimmingpool');
 
     $sql="SELECT * FROM customer WHERE id =?";
@@ -38,7 +39,7 @@ function isregister($id){
 
     if($stmt->fetch())
     {
-        $flag=true;//already register
+        $flag=true; //already register
     }
     else
         $flag=false;
@@ -49,7 +50,8 @@ function isregister($id){
     return $flag;
 }
 
-function issleep($id){
+function issleep($id)
+{
     $mysqli=new mysqli('localhost','zhe','DCLAB@zaq1xsw2','swimmingpool');
 
     $sql="SELECT sign FROM log WHERE id =? order by time desc";
@@ -89,11 +91,9 @@ function register($id,$level,$date,$near_gateway)
     $mysqli->close();
 
     writelog($id,$level,$date,"Register",$near_gateway);
-
 }
 
 function writelog($id,$level,$time,$sign,$near_gateway){
-
     $mysqli=new mysqli('localhost','zhe','DCLAB@zaq1xsw2','swimmingpool');
 
     $sql="INSERT INTO `log` (id,level,time,sign,near_gateway)VALUES(?,?,?,?,?)";
@@ -103,7 +103,6 @@ function writelog($id,$level,$time,$sign,$near_gateway){
     
     $stmt->close();
     $mysqli->close();
-
 }
 
 function nrf_sleep($id,$level,$date,$near_gateway){
