@@ -27,6 +27,7 @@
                             <th> Sign</th>
                             <th> Alive time</th>
                             <th> Near gateway</th>
+                            <th> Pipe </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,14 +43,21 @@
 
                             foreach($ids as $id){
                                 $date = time();
-                                $sql="SELECT level, time, sign,near_gateway FROM log WHERE id =? order by time desc";
+                                $sql="SELECT level, time, sign,near_gateway,pipe FROM log WHERE id =? order by time desc";
                                 $stmt=$mysqli->prepare($sql);
                                 $stmt->bind_param('i',$id);
                                 $stmt->execute();
-                                $stmt->bind_result($level,$time,$sign,$near_gateway);
+                                $stmt->bind_result($level,$time,$sign,$near_gateway,$pipe);
                                 $stmt->fetch();
                                 $misstime=$date-strtotime($time);
-                                echo "<tr><td>$id</td><td>$level</td><td>$sign</td><td class='miss-time'>$misstime s</td><td>$near_gateway</td></tr>";
+                                echo "<tr>
+                                        <td>$id</td>
+                                        <td>$level</td>
+                                        <td>$sign</td>
+                                        <td class='miss-time'>$misstime s</td>
+                                        <td>$near_gateway</td>
+                                        <td>$pipe</td>
+                                    </tr>";
                                 
                                 $stmt->close();
                             }

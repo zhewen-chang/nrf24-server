@@ -2,8 +2,6 @@
 $data = isset($_GET["data"])? $_GET["data"] : "";
 $code = isset( $_GET["code"])?$_GET["code"] : "";
 $near_gateway = isset( $_GET["gateway"])?$_GET["gateway"] : "";
-$pipe=isset( $_GET["pipe"])?$_GET["pipe"] : "";
-
 if($code=='DCLAB')
 {
     $date = date("Y-m-d H:i:s");
@@ -19,18 +17,17 @@ if($code=='DCLAB')
     $id=intval($id);
 
     if($data[4]=='R')
-        register($id,$level,$date,$near_gateway,$pipe);
+        register($id,$level,$date,$near_gateway);
     else if($data[4]=='S')
-        nrf_sleep($id,$level,$date,$near_gateway,$pipe);
+        nrf_sleep($id,$level,$date,$near_gateway);
     else if($data[4]=='W')
-        wakeup($id,$level,$date,$near_gateway,$pipe);
+        wakeup($id,$level,$date,$near_gateway);
     else if($data[4]=='A')
-        alive($id,$level,$date,$near_gateway,$pipe);
+        alive($id,$level,$date,$near_gateway);
 }
 
-function isregister($id)
-{
-    $mysqli=new mysqli('localhost','zhe','DCLAB@zaq1xsw2','swimmingpool');
+function isregister($id){
+    $mysqli=new mysqli('localhost','root','Callum@1996','swimmingpool');
 
     $sql="SELECT * FROM customer WHERE id =?";
     $stmt=$mysqli->prepare($sql);
@@ -40,7 +37,7 @@ function isregister($id)
 
     if($stmt->fetch())
     {
-        $flag=true; //already register
+        $flag=true;//already register
     }
     else
         $flag=false;
@@ -51,9 +48,8 @@ function isregister($id)
     return $flag;
 }
 
-function issleep($id)
-{
-    $mysqli=new mysqli('localhost','zhe','DCLAB@zaq1xsw2','swimmingpool');
+function issleep($id){
+    $mysqli=new mysqli('localhost','root','Callum@1996','swimmingpool');
 
     $sql="SELECT sign FROM log WHERE id =? order by time desc";
     $stmt=$mysqli->prepare($sql);
@@ -81,7 +77,7 @@ function register($id,$level,$date,$near_gateway)
 {
     if(isregister($id)==true)
         return ;
-    $mysqli=new mysqli('localhost','zhe','DCLAB@zaq1xsw2','swimmingpool');
+    $mysqli=new mysqli('localhost','root','Callum@1996','swimmingpool');
 
     $sql="INSERT INTO `customer` (id,level)VALUES(?,?)";
     $stmt=$mysqli->prepare($sql);
@@ -91,37 +87,38 @@ function register($id,$level,$date,$near_gateway)
     $stmt->close();
     $mysqli->close();
 
-    writelog($id,$level,$date,"Register",$near_gateway,$pipe);
+    writelog($id,$level,$date,"Register",$near_gateway);
+
 }
 
-function writelog($id,$level,$time,$sign,$near_gateway,$pipe){
-    $mysqli=new mysqli('localhost','zhe','DCLAB@zaq1xsw2','swimmingpool');
+function writelog($id,$level,$time,$sign,$near_gateway){
 
-    $sql="INSERT INTO `log` (id,level,time,sign,near_gateway,pipe)VALUES(?,?,?,?,?,?)";
+    $mysqli=new mysqli('localhost','root','Callum@1996','swimmingpool');
+
+    $sql="INSERT INTO `log` (id,level,time,sign,near_gateway)VALUES(?,?,?,?,?)";
     $stmt=$mysqli->prepare($sql);
-    $stmt->bind_param('issssi',$id,$level,$time,$sign,$near_gateway,$pipe);
+    $stmt->bind_param('issss',$id,$level,$time,$sign,$near_gateway);
     $stmt->execute();
     
     $stmt->close();
     $mysqli->close();
+
 }
 
-
-
-function nrf_sleep($id,$level,$date,$near_gateway,$pipe){
+function nrf_sleep($id,$level,$date,$near_gateway){
     if(issleep($id)==true)
         return;
-    writelog($id,$level,$date,"Sleep",$near_gateway,$pipe);
+    writelog($id,$level,$date,"Sleep",$near_gateway);
 }    
 
-function wakeup($id,$level,$date,$near_gateway,$pipe){
+function wakeup($id,$level,$date,$near_gateway){
     if(issleep($id)==false)
         return;
-    writelog($id,$level,$date,"Wakeup",$near_gateway,$pipe);
+    writelog($id,$level,$date,"Wakeup",$near_gateway);
 } 
 
-function alive($id,$level,$date,$near_gateway,$pipe){
+function alive($id,$level,$date,$near_gateway){
     if(issleep($id)==true)
         return;
-    writelog($id,$level,$date,"Alive",$near_gateway,$pipe);
+    writelog($id,$level,$date,"Alive",$near_gateway);
 } 
