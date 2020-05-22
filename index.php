@@ -2,12 +2,12 @@
 <html>
 <head>
     <title>Anti-drown system</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><!--when use chineese, need this-->
-    <meta name="viewport" content="width=device-width, user-scalable=no" /><!--mobile mode-->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> <!--when use chineese, need this-->
+    <meta name="viewport" content="width=device-width, user-scalable=no" /> <!--mobile mode-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> <!--use materialize-->  
-    <script src="//cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script><!--javascript library-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script><!--use materialize-->
-    <script src="main.js"></script><!--call main.js-->
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script> <!--javascript library-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> <!--use materialize-->
+    <script src="main.js"></script> <!--call main.js-->
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
