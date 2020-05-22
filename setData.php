@@ -1,8 +1,8 @@
 <?php
-$data = isset($_GET["data"])? $_GET["data"] : "";
-$code = isset( $_GET["code"])?$_GET["code"] : "";
-$near_gateway = isset( $_GET["gateway"])?$_GET["gateway"] : "";
-$pipe = isset( $_GET["pipe"])?$_GET["pipe"] : "";
+$data           = isset($_GET["data"])      ? $_GET["data"]     : "";
+$code           = isset( $_GET["code"])     ? $_GET["code"]     : "";
+$near_gateway   = isset( $_GET["gateway"])  ? $_GET["gateway"]  : "";
+$pipe           = isset( $_GET["pipe"])     ? $_GET["pipe"]     : "";
 
 $config = json_decode(file_get_contents("./config.json"));
 
@@ -115,7 +115,7 @@ function writelog($id,$level,$time,$sign,$near_gateway,$pipe)
     global $config;
     $mysqli = new mysqli($config->db_host, $config->db_name, $config->db_password, $config->db_table);
 
-    $sql="INSERT INTO `log` (id,level,time,sign,near_gateway,pipe)VALUES(?,?,?,?,?,?)";
+    $sql="INSERT INTO `log` (id,level,time,sign,near_gateway,pipe) VALUES (?,?,?,?,?,?)";
     $stmt=$mysqli->prepare($sql);
     $stmt->bind_param('issssi',$id,$level,$time,$sign,$near_gateway,$pipe);
     $stmt->execute();
