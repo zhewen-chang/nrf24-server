@@ -32,7 +32,8 @@
                     </thead>
                     <tbody>
                         <?php
-                            $mysqli=new mysqli('localhost','zhe','DCLAB@zaq1xsw2','swimmingpool');
+                            $config = json_decode(file_get_contents("./config.json"));
+                            $mysqli = new mysqli($config->db_host, $config->db_name, $config->db_password, $config->db_table);
                             $sql="SELECT id FROM customer";
                             $stmt=$mysqli->prepare($sql);
                             $stmt->execute();
