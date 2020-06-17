@@ -4,7 +4,7 @@ $code           = isset( $_GET["code"])     ? $_GET["code"]     : "";
 $near_gateway   = isset( $_GET["gateway"])  ? $_GET["gateway"]  : "";
 $pipe           = isset( $_GET["pipe"])     ? $_GET["pipe"]     : "";
 
-$config = json_decode(file_get_contents("./config.json"));
+$config = json_decode(file_get_contents("/var/www/html/config.json"));
 
 if($code=='DCLAB')
 {

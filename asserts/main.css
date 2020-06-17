@@ -7,3 +7,20 @@ body {
 main {
     flex: 1 0 auto;
 }
+
+.last-update {
+    font-size: 0.8rem;
+    opacity: .8;
+}
+
+.button-box{
+    text-align: right;
+}
+
+.card.login-card {
+    padding: 1em;
+}
+
+.submit-box {
+    text-align: center;
+}

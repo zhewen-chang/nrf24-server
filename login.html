@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+    <title>Anti-drown system</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> <!--when use chineese, need this-->
+    <meta name="viewport" content="width=device-width, user-scalable=no" /> <!--mobile mode-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> <!--use materialize-->  
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script> <!--javascript library-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> <!--use materialize-->
+    <script src="asserts/main.js"></script> <!--call main.js-->
+    <link rel="stylesheet" href="asserts/main.css">
+    <script>
+        $.ajax("/exec/session.php") 
+        .done(function(res) {
+            if(res=="true")
+                window.location.href='/setting.html';
+
+        });
+
+    </script>
+</head>
+<body>
+    <header class="center-align">
+        <div class="header-inner">
+            <h1>Login</h1>
+        </div>
+    </header>
+    <main>
+        <div class="main-inner container row">
+            <div class="card col l4 offset-l4 s12 login-card">
+                <form action="/exec/do-login.php" method="POST"> 
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">people</i>
+                        <input id="user" name="user" type="text">
+                        <label for="icon_prefix">User</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">fingerprint</i>
+                        <input id="password" name="password" type="password">
+                        <label for="icon_prefix">Password</label>
+                    </div>
+                    <div class="submit-box">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Login
+                            <i class="material-icons right">send</i>
+                          </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer class="page-footer center-align white">
+        <div class="footer-copyright white black-text">
+            <div class="container">
+                <span>&copy; 2020 Zhe</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

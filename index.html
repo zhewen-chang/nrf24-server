@@ -18,25 +18,26 @@
     </header>
     <main>
         <div class="main-inner container">
+            <div class="button-box">
+                <a class="waves-effect waves-light btn" href="/setting.html">LOGIN</a>
+            </div>
             <div class="card">
                 <table class="striped centered">
                     <thead>
                         <tr>
-                            <th> ID</th>
-                            <th> Level</th>
-                            <th> Sign</th>
-                            <th> Alive time</th>
-                            <th> Near gateway</th>
+                            <th> ID </th>
+                            <th> Level </th>
+                            <th> Sign </th>
+                            <th> Alive Time </th>
+                            <th> Near Gateway </th>
                             <th> Pipe </th>
                         </tr>
                     </thead>
                     <tbody id="ajax-body">
-                        <?php
-                            include_once("./exec/getData.php");
-                        ?>
                     </tbody>
                 </table>
             </div>
+            <div class="right-align last-update">Last Update: <span>-</span></div>
         </div>
     </main>
     <footer class="page-footer center-align white">
