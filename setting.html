@@ -20,29 +20,50 @@
     </script>
 </head>
 <body>
-    <header class="center-align">
+    <header>
         <div class="header-inner">
-            <h1>Setting</h1>
+            <nav class=" blue lighten-4 grey-text">
+                <div class="nav-wrapper container">
+                  <a href="#" class="brand-logo">Setting</a>
+                  <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="/exec/logout.php">Logout</a></li>
+                  </ul>
+                </div>
+              </nav>
         </div>
     </header>
     <main>
-        <div class="main-inner container">
-            <div class="button-box">
-                <a class="waves-effect waves-light btn" href="/exec/logout.php">LOGOUT</a>
+        <div class="main-inner container row">
+            <div class="col s5">
+                <div class="card">
+                    <table class="striped centered">
+                        <thead>
+                            <tr>
+                                <th> ID </th>
+                                <th> Level </th>
+                                <th> Pipe </th>
+                            </tr>
+                        </thead>
+                        <tbody id="ajax-customer">
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="card">
-                <table class="striped centered">
-                    <thead>
-                        <tr>
-                            <th> ID </th>
-                            <th> Level </th>
-                            <th> Pipe </th>
-                        </tr>
-                    </thead>
-                    <tbody id="ajax-body">
-                    </tbody>
-                </table>
-            </div>
+            <div class="col s5 offset-s2">
+                <div class="card">
+                    <table class="striped centered">
+                        <thead>
+                            <tr>
+                                <th> Gateway ip</th>
+                                <th> Gateway number</th>
+                                <th> counter</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ajax-gateway">
+                        </tbody>
+                    </table>
+                </div>
+            </div> 
         </div>
     </main>
     <footer class="page-footer center-align white">

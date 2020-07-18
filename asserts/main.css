@@ -24,3 +24,8 @@ main {
 .submit-box {
     text-align: center;
 }
+
+nav {
+    background: rgb(25,118,210);
+background: linear-gradient(90deg, rgba(25,118,210,1) 0%, rgba(66,165,245,1) 13%, rgba(197,202,233,1) 43%, rgba(186,221,239,1) 77%, rgba(178,235,242,1) 100%);
+}

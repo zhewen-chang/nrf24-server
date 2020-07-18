@@ -1,7 +1,7 @@
 <?php
     $config = json_decode(file_get_contents("/var/www/html/config.json"));
     $mysqli = new mysqli($config->db_host, $config->db_name, $config->db_password, $config->db_table);
-    $sql="SELECT * FROM customer";
+    $sql="SELECT id,level,pipe FROM customer where `counter` = true";
     $stmt=$mysqli->prepare($sql);
     $stmt->execute();
     $stmt->bind_result($id, $level, $pipe);
